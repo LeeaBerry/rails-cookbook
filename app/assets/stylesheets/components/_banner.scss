@@ -1,0 +1,16 @@
+.banner {
+  // background-color: #fef2e3;
+  height: 450px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  h1, h3 {
+    color: black;
+    background-color: #fef2e3;
+  }
+
+}

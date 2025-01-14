@@ -1,8 +1,28 @@
-<h1>Cookbook</h1>
-<%= link_to "Create a new category", new_category_path%>
 
-<ul>
-  <% @categories.each do |category| %>
-    <li><%= link_to category.name, category_path(category) %> </li>
+<div class="banner" style="background-image: url('<%= image_path "banner.jpg" %>')">
+  <div>
+    <h1>My Vegan Cookbook</h1>
+    <h3>A place for all your favorite vegan recipes</h3>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="info-top">
+    <h3>List of Categories</h3>
+    <%= link_to 'New Category', new_category_path, class: "btn btn-success" %>
+  </div>
+
+  <div class="cards">
+    <% @categories.each do |category|  %>
+
+      <%= link_to category_path(category) do %>
+        <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= image_path "category.jpg" %>)">
+          <h2><%= category.name %></h2>
+      </div>
+    <% end %>
+
   <% end %>
-</ul>
+
+  </div>
+</div>
