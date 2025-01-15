@@ -1,4 +1,4 @@
-<div class="banner" style="background-image: url('<%= image_path "category.jpg" %>')">
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('<%= cl_image_path @category.photo.key, height: 300, crop: :fill %>')">
   <div>
     <h1><%= @category.name %></h1>
   </div>
@@ -12,7 +12,7 @@
 
   <div class="cards">
       <% @category.bookmarks.each do |bookmark|%>
-        <div class="card recipe">
+        <div class="card-recipe">
 
           <%= link_to bookmark_path(bookmark),
               data: {turbo_method: :delete,

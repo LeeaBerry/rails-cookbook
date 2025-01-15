@@ -1,5 +1,5 @@
 
-<div class="banner" style="background-image: url('<%= image_path "banner.jpg" %>')">
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('<%= image_path "banner.jpg" %>')">
   <div>
     <h1>My Vegan Cookbook</h1>
     <h3>A place for all your favorite vegan recipes</h3>
@@ -17,7 +17,7 @@
     <% @categories.each do |category|  %>
 
       <%= link_to category_path(category) do %>
-        <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= image_path "category.jpg" %>)">
+        <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path category.photo.key %>')">
           <h2><%= category.name %></h2>
       </div>
     <% end %>
