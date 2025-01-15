@@ -8,36 +8,56 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+require "json"
+require "open-uri"
+
 puts "Cleaning the DB"
+Bookmark.destroy_all
+Category.destroy_all
 Recipe.destroy_all
+puts "Creating recipes...."
+
+categories = ["Breakfast", "Pasta", "Tofu", "Dessert"]
+
+categories.each do |category|
+  url = "https://www.themealdb.com/api/json/v1/1/filter.php?c=#{category}"
+  url = "https://api.github.com/users/ssaunier"
+  recipes_serialized = URI.parse(url).read
+  recipes = JSON.parse(recipes_serialized)
+  recipes["meals"].each do |recipe|
+    p recipe["idMeal"]
+  end
+end
 
 
-Recipe.create!(
-  name: "Butternut Squash and Red Lentil Soup",
-  description: "Serve this nourishing butternut squash red lentil soup with a hunk of whole grain bread or gluten-free buckwheat bread. Ready in just 35 minutes, this is an excellent light meal for a busy weeknight. Leftovers taste even better the next day!",
-  image_url: "https://www.forksoverknives.com/uploads/2024/12/Lentil-Squash-Chowder-Wordpress.jpg?auto=webp",
-  rating: 4.6
-)
 
-Recipe.create!(
-  name: "Silky Vegan Chocolate Ganache Tart",
-  description: "This spectacular vegan chocolate ganache tart is perfect for birthdays, Valentine’s Day, Mother’s Day, or any celebration table.",
-  image_url:     "https://www.forksoverknives.com/uploads/2024/12/chocolate-ganache-tarte-wide-crop.jpg?auto=webp",
-  rating: 3.9
-)
 
-Recipe.create!(
-  name: "Veggie Mac and Cheese with Sun-Dried Tomatoes",
-  description: "If you’ve got some leftover veggies in the fridge and pasta in the cupboard, you’re halfway to creating this simple, seven-ingredient (not counting salt and pepper) mac and cheese, which is kid-friendly and perfect for busy weeknights.",
-  image_url:     "https://www.forksoverknives.com/uploads/2024/12/Loaded-Mac-and-Cheese-Wordpress.jpg?auto=webp",
-  rating: 4.5
-)
+# Recipe.create!(
+#   name: "Butternut Squash and Red Lentil Soup",
+#   description: "Serve this nourishing butternut squash red lentil soup with a hunk of whole grain bread or gluten-free buckwheat bread. Ready in just 35 minutes, this is an excellent light meal for a busy weeknight. Leftovers taste even better the next day!",
+#   image_url: "https://www.forksoverknives.com/uploads/2024/12/Lentil-Squash-Chowder-Wordpress.jpg?auto=webp",
+#   rating: 4.6
+# )
 
-Recipe.create!(
-  name: "Sheet Pan Supper with Broccoli, Spuds, and Maple-Balsamic Chickpeas",
-  description:"For convenience, you can’t go wrong with a sheet pan dinner! Roasted in a hot oven, the natural sugars in sweet potato, red potato, and red onion start to caramelize and take on a rich umami, flavor.",
-  image_url:     "https://www.forksoverknives.com/uploads/2024/12/Beans-and-Sweets-Sheet-Pan-Dinner-Wordpress.jpg?auto=webp",
-  rating: 5.0
-)
+# Recipe.create!(
+#   name: "Silky Vegan Chocolate Ganache Tart",
+#   description: "This spectacular vegan chocolate ganache tart is perfect for birthdays, Valentine’s Day, Mother’s Day, or any celebration table.",
+#   image_url:     "https://www.forksoverknives.com/uploads/2024/12/chocolate-ganache-tarte-wide-crop.jpg?auto=webp",
+#   rating: 3.9
+# )
+
+# Recipe.create!(
+#   name: "Veggie Mac and Cheese with Sun-Dried Tomatoes",
+#   description: "If you’ve got some leftover veggies in the fridge and pasta in the cupboard, you’re halfway to creating this simple, seven-ingredient (not counting salt and pepper) mac and cheese, which is kid-friendly and perfect for busy weeknights.",
+#   image_url:     "https://www.forksoverknives.com/uploads/2024/12/Loaded-Mac-and-Cheese-Wordpress.jpg?auto=webp",
+#   rating: 4.5
+# )
+
+# Recipe.create!(
+#   name: "Sheet Pan Supper with Broccoli, Spuds, and Maple-Balsamic Chickpeas",
+#   description:"For convenience, you can’t go wrong with a sheet pan dinner! Roasted in a hot oven, the natural sugars in sweet potato, red potato, and red onion start to caramelize and take on a rich umami, flavor.",
+#   image_url:     "https://www.forksoverknives.com/uploads/2024/12/Beans-and-Sweets-Sheet-Pan-Dinner-Wordpress.jpg?auto=webp",
+#   rating: 5.0
+# )
 
 puts "Done! #{Recipe.count} have been added"
